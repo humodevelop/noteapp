@@ -1,0 +1,218 @@
+*{
+    font-family: 'Lato', sans-serif;
+}
+
+body{
+    background-image: linear-gradient(#023e8a, #0077b6);
+    background-attachment: fixed;
+    position: relative;
+    margin: 0 auto;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    margin: 10px auto;
+    width: 300px;
+}
+
+.header button{
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.4);
+}
+
+.header button:hover{
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+#container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    padding: 10px;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/*--------------- NOTE ------------------------*/
+
+.note{
+    min-width: 300px;
+    max-width: 300px;
+    height: 350px;
+    background-color: #379acf;
+    border-radius: 5px;
+    box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.4);
+}
+
+.note-content{
+    text-align: left;
+    word-wrap: break-word; /*si el texto sale del contenedor, hacer un corte y continuar debajo*/
+    padding: 5px;
+    white-space:pre-wrap; /*comportar el elemento como un preformateado (guarda los saltos de linea)*/
+}
+
+.note-banner{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    padding: 4px;
+    height: 35px;
+    width: 100%;
+
+    box-sizing: border-box;
+    background-color: #2d78a0;
+    text-align: left;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.title-note{
+    padding: 2px;
+    width: 90%;
+    font-weight: 600;
+    text-align: left;
+    word-wrap: break-word; /*si el texto sale del contenedor, hacer un corte y continuar debajo*/
+}
+
+.edit-note-btn{
+    width: 10%;
+    height: 100%;
+    cursor: pointer;
+    text-align: center;
+    z-index: 1;
+    padding: 2px;
+    margin: 2px;
+    text-align: center;
+    user-select: none;
+}
+
+/*---------------SUBMENU NOTE------------------------*/
+
+.submenu{
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    width: 100px;
+    right: 0;
+    top: 100%;
+    background-color: #1d82b9;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.submenu-item{
+    padding: 2px;
+    user-select: none;
+}
+
+.submenu-item:hover{
+    background-color: rgba(0, 0, 0, 0.150);
+}
+
+/*---------------MODAL BOX------------------------*/
+
+#fixed-box{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+/*---------------MODAL CREATE-NOTE-MENU------------------------*/
+
+#create-menu{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 4px;
+    padding: 10px;
+    width: 500px;
+    height: 400px;  
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #0077b6;
+    border-radius: 6px;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.200); /* xOffset yOffset blur distance color*/ 
+}
+
+#create-menu label{
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+}
+
+.banner-menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px;
+    height: 30px;
+}
+
+#title-note-menu{
+    width: 90%;
+}
+
+.close-btn{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: rgba(0, 0, 0, 0.6) solid 1px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 2px;
+}
+
+.close-btn:hover{
+    background-color: rgba(0, 0, 0, 0.1)
+}
+
+#confirm-note-btn{
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: auto;
+}
+
+/*-----------------------------------------------------*/
+
+.time-container{
+    width: 300px;
+    height: 60px;
+    text-align: center;
+
+    font-size: 1.3rem;
+    margin: 10px auto;
+    color: white;
+    
+    border: rgba(0, 0, 0, 0.200) solid 2px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.150);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.200);
+}
+
+.line{
+    width: 50%;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.150);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.200);
+    border: none;
+}
+
