@@ -182,11 +182,11 @@ function SetDate(){
     let timeElement = document.getElementsByClassName("time"); //elementos donde se va a mostrar la hora
     let dateElement = document.getElementsByClassName("date"); //elementos donde se va a mostrar la fecha
 
-    let days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+    let days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
     let months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
     let date = new Date();
 
-    let day = date.getDay() - 1; //Se resta 1 porque el array de los dias empieza en 0 (index).
+    let day = date.getDay();
     let dateNumber = date.getDate();
     let month = date.getMonth();
     let hour = date.getHours();
