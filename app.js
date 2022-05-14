@@ -49,7 +49,7 @@ function OnAddButton(){
     contentTextArea.value = "";
     confirmNoteBTN.textContent = "Agregar Nota ➕";
     
-    fixedBox.style.display = "block";
+    fixedBox.style.display = "flex";
     titleInput.focus();
 }
 
@@ -133,16 +133,21 @@ function OnEdit(element, index){
     }else{
         submenu.style.display = "none";
     }
+    //MOSTRAR MENU PARA EDITAR LA NOTA
     let editMenu = submenu.querySelector(".edit-submenu");
     editMenu.onclick = ()=>{
         submenu.style.display = "none";
         ShowEditMenu(index)
     };
 
+    //ELIMINAR LA NOTA
     let deleteMenu = submenu.querySelector(".delete-submenu");
     deleteMenu.onclick = ()=>{
-        submenu.style.display = "none";
-        DeleteNote(index);
+        //Ventana de confirmación por si se elimina la nota por error.
+        if(window.confirm(`¿Eliminar nota del título "${notes[index].title}"? 😪`)){
+            submenu.style.display = "none";
+            DeleteNote(index);
+        }
     };
 }
 
@@ -154,7 +159,7 @@ function ShowEditMenu(index){
     confirmNoteBTN.textContent = "Actualizar nota ✔";
     titleInput.value = notes[index].title; //Establecer el valor del input con el titulo de la nota
     contentTextArea.value = notes[index].content; //Establecer el valor del input con el contenido de la nota
-    fixedBox.style.display = "block"; //Mostrar el menu
+    fixedBox.style.display = "flex"; //Mostrar el menu
     titleInput.focus();
 }
 
