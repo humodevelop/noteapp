@@ -15,31 +15,31 @@ let timerDate = setInterval(() => { //Timer para actualizar la fecha cada 1 minu
 const addNoteButton = document.getElementById("addnote-button"); //Boton para abrir el menu de creación de nota.
     addNoteButton.addEventListener('click', OnAddButton);
 
-const fixedBox = document.getElementById("fixed-box"); //Caja con position:fixed, donde se va a situar el menu en medio de la pantalla.
-    fixedBox.onclick = function(event){
-            if(event.target == fixedBox){ //si el evento click es el elemento ("modalbox", elemento fixed) ocultarlo
+const modal = document.getElementById("modal"); //Caja con position:fixed, donde se va a situar el menu en medio de la pantalla.
+    modal.onclick = function(event){
+            if(event.target == modal){ //si el evento click es el elemento ("modalbox", elemento fixed) ocultarlo
                 HideFixedBox();   
             }
         ;};
 
-const closeBTN = fixedBox.querySelector(".close-btn"); //Botón que cierra el panel de creacion o edición de nota.
+const closeBTN = modal.querySelector(".close-btn"); //Botón que cierra el panel de creacion o edición de nota.
     closeBTN.addEventListener('click', ()=>{
         HideFixedBox();
     });
 
-const confirmNoteBTN = fixedBox.querySelector("#confirm-note-btn"); //Boton que confirma la creacion o edicion de la nota.
+const confirmNoteBTN = modal.querySelector("#confirm-note-btn"); //Boton que confirma la creacion o edicion de la nota.
     confirmNoteBTN.addEventListener('click', OnConfirmNoteButton);
 
-const titleNoteMenu = fixedBox.querySelector("#title-note-menu"); //Titulo del menu, si crea o edita una nota.
+const titleNoteMenu = modal.querySelector("#title-note-menu"); //Titulo del menu, si crea o edita una nota.
 
-const titleInput = fixedBox.querySelector("#title-note-input"); //Input(text) donde va a ir el contenido de la nota.
-const contentTextArea = fixedBox.querySelector("#content-note-input"); //TextArea donde va a ir el contenido de la nota.
+const titleInput = modal.querySelector("#title-note-input"); //Input(text) donde va a ir el contenido de la nota.
+const contentTextArea = modal.querySelector("#content-note-input"); //TextArea donde va a ir el contenido de la nota.
 /*----------------------------------------------------------*/
 
 function HideFixedBox(){
     contentTextArea.value = ""; //Limpiar input
     titleInput.value = ""; //Limpiar input
-    fixedBox.style.display = "none"; //Ocultar el menu
+    modal.style.display = "none"; //Ocultar el menu
 }
 
 function OnAddButton(){
@@ -49,7 +49,7 @@ function OnAddButton(){
     contentTextArea.value = "";
     confirmNoteBTN.textContent = "Agregar Nota ➕";
     
-    fixedBox.style.display = "flex";
+    modal.style.display = "flex";
     titleInput.focus();
 }
 
@@ -98,57 +98,31 @@ function ShowNotes(){
     let container = document.querySelector("#container");
     container.innerHTML = "";
 
-    
     notes.forEach((value, index) =>{
         let noteElement = document.createElement('div');
         noteElement.innerHTML = `
             <div class="note">
-                <div class="note-banner">
-                    <div class="title-note">${value.title}</div>
-                    <div>
-                        <span onclick="OnEdit(this, ${index})" class="edit-note-btn">
-                        💬<!-- -->
-                        </span>
+                <div class="note_banner">
+                    <div class="note_title">${value.title}</div>
+                    <div class="note_options">💬                
                         <div class="submenu">
-                            <div class="edit-submenu submenu-item">Editar 📝</div>
-                            <div class="delete-submenu submenu-item">Eliminar ❌</div>
+                            <div onclick="ShowEditMenu(${index})" class="edit-submenu submenu-item">Editar 📝</div>
+                            <div onclick="DeleteNoteConfirm(${index})" class="delete-submenu submenu-item">Eliminar ❌</div>
                         </div>
                     </div>
                 </div>
-                <div class="note-content">${value.content}</div>
+                <div class="note_content">${value.content}</div>
             </div>
         `;
         container.innerHTML += noteElement.innerHTML;
     });
 }
 
-/*Recibe el parametro "this" haciendo referencia a ese elemento
-  para luego obtener el submenu que esta en el mismo contenedor.
-*/
-function OnEdit(element, index){
-    let submenu = element.parentElement.querySelector(".submenu");
-    let display = window.getComputedStyle(submenu).display;
-    if(display == "none"){
-        submenu.style.display = "flex";
-    }else{
-        submenu.style.display = "none";
+function DeleteNoteConfirm(index){
+    //Ventana de confirmación por si se elimina la nota por error.
+    if(window.confirm(`¿Eliminar nota del título "${notes[index].title}"? 😪`)){
+        DeleteNote(index);
     }
-    //MOSTRAR MENU PARA EDITAR LA NOTA
-    let editMenu = submenu.querySelector(".edit-submenu");
-    editMenu.onclick = ()=>{
-        submenu.style.display = "none";
-        ShowEditMenu(index)
-    };
-
-    //ELIMINAR LA NOTA
-    let deleteMenu = submenu.querySelector(".delete-submenu");
-    deleteMenu.onclick = ()=>{
-        //Ventana de confirmación por si se elimina la nota por error.
-        if(window.confirm(`¿Eliminar nota del título "${notes[index].title}"? 😪`)){
-            submenu.style.display = "none";
-            DeleteNote(index);
-        }
-    };
 }
 
 function ShowEditMenu(index){
@@ -159,7 +133,7 @@ function ShowEditMenu(index){
     confirmNoteBTN.textContent = "Actualizar nota ✔";
     titleInput.value = notes[index].title; //Establecer el valor del input con el titulo de la nota
     contentTextArea.value = notes[index].content; //Establecer el valor del input con el contenido de la nota
-    fixedBox.style.display = "flex"; //Mostrar el menu
+    modal.style.display = "flex"; //Mostrar el menu
     titleInput.focus();
 }
 

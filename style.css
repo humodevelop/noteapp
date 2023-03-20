@@ -47,38 +47,40 @@ body{
 /*--------------- NOTE ------------------------*/
 
 .note{
-    min-width: 300px;
-    max-width: 300px;
-    height: 350px;
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    height: 320px;
     background-color: #379acf;
     border-radius: 5px;
     box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.4);
 }
 
-.note-content{
+.note_content{
     text-align: left;
-    word-wrap: break-word; /*si el texto sale del contenedor, hacer un corte y continuar debajo*/
     padding: 5px;
+    height: 100%;
+    overflow-y: auto;
+    word-wrap: break-word; /*si el texto sale del contenedor, hacer un corte y continuar debajo*/
     white-space:pre-wrap; /*comportar el elemento como un preformateado (guarda los saltos de linea)*/
 }
 
-.note-banner{
+.note_banner{
     display: flex;
     flex-direction: row;
     align-items: center;
     position: relative;
-    padding: 4px;
-    height: 35px;
+    height: 24px;
     width: 100%;
 
     box-sizing: border-box;
     background-color: #2d78a0;
-    text-align: left;
+    
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
 
-.title-note{
+.note_title{
     padding: 2px;
     width: 90%;
     font-weight: 600;
@@ -96,6 +98,17 @@ body{
     margin: 2px;
     text-align: center;
     user-select: none;
+}
+
+.note_options{
+    width: 10%;
+    height: 100%;
+    cursor: pointer;
+    user-select: none;
+}
+
+.note_options:hover .submenu{
+    display: flex;
 }
 
 /*---------------SUBMENU NOTE------------------------*/
@@ -123,7 +136,7 @@ body{
 
 /*---------------MODAL BOX------------------------*/
 
-#fixed-box{
+#modal{
     display: none;
     flex-direction: column;
     justify-content: center;
